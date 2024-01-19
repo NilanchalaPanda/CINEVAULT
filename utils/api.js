@@ -7,7 +7,7 @@ export const fetchDataFromAPI = async (url, params) => {
     const response = await axios.get(`https://api.themoviedb.org/3${url}`, {
       params: {
         api_key: apiKey,
-        params,
+        ...params,
       },
     });
     return response.data;
