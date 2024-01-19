@@ -1,12 +1,3 @@
-// const apiTesting = async () => {
-//   try {
-//     const data = await fetchDataFromAPI("/discover/movie", {});
-//     console.log(data);
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// };
-
 import { useEffect, useState } from "react";
 import { fetchDataFromAPI } from "../../utils/api";
 

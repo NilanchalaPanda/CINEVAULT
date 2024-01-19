@@ -1,20 +1,28 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import useFetch from "../../hooks/useFetch";
 
+import LazyImage from "../lazyLoadImages/LazyImage";
+import ContentWrapper from "../contentWrapper/ContentWrapper";
+
 const HeroBanner = () => {
+  const { url } = useSelector((state) => state.home);
   const { data, loading } = useFetch("/movie/upcoming");
 
   const navigate = useNavigate();
 
+  // STATE HOOKS -
   const [bgImage, setBgImage] = useState();
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
-    const bg = data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path;
-    
-    console.log(bg);
+    const bg =
+      url.backdrop +
+      data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path;
+
+    setBgImage(bg);
   }, [data]);
 
   const handleSearchInput = (e) => {
@@ -25,24 +33,33 @@ const HeroBanner = () => {
 
   return (
     <div className="heroBanner">
-      <div className="wrapper">
-        <div className="heroBannerContent">
-          <span className="title">Welcome.</span>
-          <span className="subTitle">
-            Millions of movies, TV Shows and people to discover. Explore now.
-          </span>
-          <div className="searchInput">
-            <input
-              type="text"
-              placeholder="Search for new movie/TV Show"
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-              onKeyUp={handleSearchInput}
-            />
-            <button>Search</button>
+      {!loading && (
+        <div className="backdrop-img">
+          <LazyImage src={bgImage} />
+        </div>
+      )}
+      <div className="opactity-layer" />
+
+      <ContentWrapper>
+        <div className="wrapper">
+          <div className="heroBannerContent">
+            <span className="title">Welcome.</span>
+            <span className="subTitle">
+              Millions of movies, TV Shows and people to discover. Explore now.
+            </span>
+            <div className="searchInput">
+              <input
+                type="text"
+                placeholder="Search for new movie/TV Show"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                onKeyUp={handleSearchInput}
+              />
+              <button>Search</button>
+            </div>
           </div>
         </div>
-      </div>
+      </ContentWrapper>
     </div>
   );
 };

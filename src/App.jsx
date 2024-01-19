@@ -1,7 +1,7 @@
-// import { useEffect } from "react";
-// import { fetchDataFromAPI } from "../utils/api";
-// import { useDispatch } from "react-redux";
-// import { getAPIConfiguration } from "./store/homeSlice";
+import { useEffect } from "react";
+import { fetchDataFromAPI } from "../utils/api";
+import { useDispatch } from "react-redux";
+import { getAPIConfiguration } from "./store/homeSlice";
 
 import "./App.css";
 
@@ -17,6 +17,29 @@ import Explore from "./pages/explore/Explore";
 import PageNotFound from "./pages/404/PageNotFound";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetchAPIConifg();
+  }, []);
+
+  const fetchAPIConifg = async () => {
+    try {
+      const data = await fetchDataFromAPI("/configuration", {});
+      // console.log("CONFIG : ", data);
+
+      const url = {
+        backdrop: `${data.images.base_url}original`,
+        poster: `${data.images.base_url}original`,
+        profile: `${data.images.base_url}original`,
+      };
+
+      dispatch(getAPIConfiguration(url));
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <BrowserRouter>
       {/* <Header /> */}
