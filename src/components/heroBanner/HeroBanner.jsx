@@ -7,6 +7,8 @@ import useFetch from "../../hooks/useFetch";
 import LazyImage from "../lazyLoadImages/LazyImage";
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 
+import './heroBanner.scss';
+
 const HeroBanner = () => {
   const { url } = useSelector((state) => state.home);
   const { data, loading } = useFetch("/movie/upcoming");
@@ -38,7 +40,7 @@ const HeroBanner = () => {
           <LazyImage src={bgImage} />
         </div>
       )}
-      <div className="opactity-layer" />
+      <div className="opacity-layer" />
 
       <ContentWrapper>
         <div className="wrapper">
