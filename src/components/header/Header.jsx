@@ -29,18 +29,43 @@ const Header = () => {
     setShowSearch(false);
   };
 
+  const handleSearchQuery = (e) => {
+    if (e.key === "Enter" && query.length > 0) {
+      navigate(`/search/${query}`);
+    }
+  };
+
+  const handleNavigation = (type) => {
+    if (type === "movie") {
+      navigate("explore/movie");
+    } else {
+      navigate("explore/tv");
+    }
+    setShowSearch(false);
+    setMobileMenu(false);
+  };
+
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
-        <div className="logo">
+        <div className="logo" onClick={() => navigate("/")}>
           <img src={logo} alt="" />
         </div>
 
         <ul className="menuItems">
-          <li className="menuItem">Movies</li>
-          <li className="menuItem">TV Shows</li>
+          <li className="menuItem" onClick={() => handleNavigation("movie")}>
+            Movies
+          </li>
+          <li
+            className="menuItem"
+            onClick={() => {
+              handleNavigation("tv");
+            }}
+          >
+            TV Shows
+          </li>
           <li className="menuItem">
-            <HiOutlineSearch />
+            <HiOutlineSearch onClick={openSearch} />
           </li>
         </ul>
 
@@ -49,22 +74,26 @@ const Header = () => {
           {!mobileMenu ? (
             <SlMenu onClick={openMobileMenu} />
           ) : (
-            <VscChromeClose onClick={(prev) => setMobileMenu(!prev)} />
+            <VscChromeClose onClick={() => setMobileMenu(false)} />
           )}
         </div>
       </ContentWrapper>
 
-      <div className="searchBar">
-        <ContentWrapper>
-          <div className="searchInput">
-            <input
-              type="text"
-              placeholder="Search for new movie/TV Show"
-            />
-            <VscChromeClose />
-          </div>
-        </ContentWrapper>
-      </div>
+      {showSearch && (
+        <div className="searchBar">
+          <ContentWrapper>
+            <div className="searchInput">
+              <input
+                type="text"
+                placeholder="Search for new movie/TV Show"
+                onChange={(e) => e.target.value}
+                onKeyUp={handleSearchQuery}
+              />
+              <VscChromeClose onClick={(prev) => setShowSearch(!prev)} />
+            </div>
+          </ContentWrapper>
+        </div>
+      )}
     </header>
   );
 };
