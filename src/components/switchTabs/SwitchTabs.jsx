@@ -1,9 +1,36 @@
-import React from 'react'
+import React, { useState } from "react";
 
-const SwitchTabs = () => {
+import "./switchTabs.scss";
+
+const SwitchTabs = ({ data, handleTabChange }) => {
+  const [selectedTab, setSelectedTab] = useState(0);
+  const [left, setLeft] = useState(0);
+
+  const activeTab = (tab, index) => {
+    setLeft(index * 100);
+    setTimeout(() => {
+      setSelectedTab(index);
+    }, 300);
+    handleTabChange(tab, index);
+  };
+
   return (
-    <div>SwitchTabs</div>
-  )
-}
+    <div className="switchingTabs">
+      <div className="tabItems">
+        {data.map((tab, index) => (
+          <span
+            key={index}
+            className={`tabItem ${selectedTab === index ? "active" : "" }`}
+            onClick={() => activeTab(tab, index)}
+          >
+            {tab}
+          </span>
+        ))}
 
-export default SwitchTabs   
+        <span className="movingBg" style={{ left }} />
+      </div>
+    </div>
+  );
+};
+
+export default SwitchTabs;

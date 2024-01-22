@@ -2,12 +2,22 @@ import useFetch from "../../../hooks/useFetch";
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import SwitchTabs from "../../../components/switchTabs/SwitchTabs";
 
+import '../home.scss'
+import { useState } from "react";
+
 export const Trending = () => {
-  const { data, loading } = useFetch("/trending/person/day");
 
-  console.log(data?.results);
+  // STATE MANAGEMENTS :
+  const [endPoint, setEndPoint] = useState("day");
 
-  const handleTabChange = (tab) => {};
+  // Fetch data for trending page
+  const { data, loading } = useFetch(`/trending/all/${endPoint}`);
+
+  // console.log(data?.results);
+
+  const handleTabChange = (tab) => {
+    setEndPoint(tab === "Day" ? "day" : "week");
+  };
 
   return (
     <div className="carouselSection">
