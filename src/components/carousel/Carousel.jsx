@@ -14,6 +14,7 @@ import ContentWrapper from "../contentWrapper/ContentWrapper";
 import LazyImage from "../../components/lazyLoadImages/LazyImage";
 import PosterFallback from "../../assets/no-poster.png";
 import CircleRating from "../circleRating/CircleRaing";
+import Genres from "../genre/genres";
 
 const Carousel = ({ data, loading }) => {
   const navigate = useNavigate();
@@ -21,7 +22,19 @@ const Carousel = ({ data, loading }) => {
 
   const carouselContainer = useRef();
 
-  const navigation = (direction) => {};
+  const navigation = (direction) => {
+    const container = carouselContainer.current;
+
+    const scrollAmount =
+      direction === "left"
+        ? container.scrollLeft - (container.offsetWidth + 20)
+        : container.scrollLeft + (container.offsetWidth + 20);
+
+    container.scrollTo({
+      left: scrollAmount,
+      behavior: "smooth",
+    });
+  };
 
   // SKELETON LOADING ANIMATION -
   const skeletonItem = () => {
@@ -41,26 +54,31 @@ const Carousel = ({ data, loading }) => {
     <div className="carousel">
       <ContentWrapper>
         <BsFillArrowLeftCircleFill
-          className="carouselLeft arrow"
+          className="carouselLeftNav arrow"
           onClick={() => navigation("left")}
         />
         <BsFillArrowRightCircleFill
-          className="carouselRight arrow"
+          className="carouselRighttNav arrow"
           onClick={() => navigation("right")}
         />
 
         {!loading ? (
-          <div className="carouselItems">
+          <div className="carouselItems" ref={carouselContainer}>
             {data?.map((item) => {
               const posterURL = item.poster_path
                 ? url.poster + item.poster_path
                 : PosterFallback;
 
               return (
-                <div key={item.id} className="carouselItem">
+                <div
+                  key={item.id}
+                  className="carouselItem"
+                  onClick={() => navigate(`/${item.media_type}/${item.id}`)}
+                >
                   <div className="posterBlock">
                     <LazyImage src={posterURL} />
                     <CircleRating rating={item.vote_average.toFixed(1)} />
+                    <Genres data={item.genre_ids.slice(0, 2)} />
                   </div>
 
                   <div className="textBlock">
