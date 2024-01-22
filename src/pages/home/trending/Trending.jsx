@@ -2,11 +2,11 @@ import useFetch from "../../../hooks/useFetch";
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import SwitchTabs from "../../../components/switchTabs/SwitchTabs";
 
-import '../home.scss'
+import "../home.scss";
 import { useState } from "react";
+import Carousel from "../../../components/carousel/Carousel";
 
 export const Trending = () => {
-
   // STATE MANAGEMENTS :
   const [endPoint, setEndPoint] = useState("day");
 
@@ -25,6 +25,8 @@ export const Trending = () => {
         <div className="carouselTitle">Trending</div>
         <SwitchTabs data={["Day", "Week"]} handleTabChange={handleTabChange} />
       </ContentWrapper>
+
+      <Carousel data={data?.results} loading={loading} />
     </div>
   );
 };
