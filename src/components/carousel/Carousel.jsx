@@ -14,7 +14,7 @@ import ContentWrapper from "../contentWrapper/ContentWrapper";
 import LazyImage from "../../components/lazyLoadImages/LazyImage";
 import PosterFallback from "../../assets/no-poster.png";
 import CircleRating from "../circleRating/CircleRaing";
-import Genres from "../genre/genres";
+import Genres from "../genre/Genres";
 
 const Carousel = ({ data, loading, endpoint }) => {
   const navigate = useNavigate();
