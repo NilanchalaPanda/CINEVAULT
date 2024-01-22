@@ -16,7 +16,7 @@ import PosterFallback from "../../assets/no-poster.png";
 import CircleRating from "../circleRating/CircleRaing";
 import Genres from "../genre/genres";
 
-const Carousel = ({ data, loading }) => {
+const Carousel = ({ data, loading, endpoint }) => {
   const navigate = useNavigate();
   const { url } = useSelector((state) => state.home);
 
@@ -73,7 +73,7 @@ const Carousel = ({ data, loading }) => {
                 <div
                   key={item.id}
                   className="carouselItem"
-                  onClick={() => navigate(`/${item.media_type}/${item.id}`)}
+                  onClick={() => navigate(`/${item.media_type || endpoint}/${item.id}`)}
                 >
                   <div className="posterBlock">
                     <LazyImage src={posterURL} />
