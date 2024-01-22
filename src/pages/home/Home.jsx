@@ -1,6 +1,7 @@
 import HeroBanner from "../../components/heroBanner/HeroBanner";
 import { Popular } from "./popular/Popular";
 import { Trending } from "./trending/Trending";
+import { TopRated } from "./topRated/TopRated";
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <HeroBanner />
       <Trending />
       <Popular />
+      <TopRated />
     </>
   );
 };
