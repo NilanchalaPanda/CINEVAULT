@@ -99,7 +99,7 @@ const DetailsBanner = ({ video, crew }) => {
                     </div>
 
                     {/* INFO */}
-                    {/* <div className="info">
+                    <div className="info">
                       {data.status && (
                         <div className="infoItem">
                           <span className="text bold">Status: </span>
@@ -124,10 +124,10 @@ const DetailsBanner = ({ video, crew }) => {
                           </span>
                         </div>
                       )}
-                    </div> */}
+                    </div>
 
                     {/* DIRECTORS */}
-                    {/* {director?.length > 0 && (
+                    {director?.length > 0 && (
                       <div className="info">
                         <span className="text bold">Direcotr : </span>
 
@@ -140,10 +140,10 @@ const DetailsBanner = ({ video, crew }) => {
                           ))}
                         </span>
                       </div>
-                    )} */}
+                    )}
 
                     {/* WRITERS */}
-                    {/* {writers?.length > 0 && (
+                    {writers?.length > 0 && (
                       <div className="info">
                         <span className="text bold">Writer : </span>
 
@@ -156,10 +156,10 @@ const DetailsBanner = ({ video, crew }) => {
                           ))}
                         </span>
                       </div>
-                    )} */}
+                    )}
 
                     {/* FOR TV SHOWS */}
-                    {/* {data?.created_by?.length > 0 && (
+                    {data?.created_by?.length > 0 && (
                       <div className="info">
                         <span className="text bold">Creator : </span>
 
@@ -172,9 +172,7 @@ const DetailsBanner = ({ video, crew }) => {
                           ))}
                         </span>
                       </div>
-                    )} */}
-
-
+                    )}
                   </div>
                 </div>
               </ContentWrapper>
