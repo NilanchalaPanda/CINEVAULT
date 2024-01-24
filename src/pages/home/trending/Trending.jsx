@@ -30,3 +30,5 @@ export const Trending = () => {
     </div>
   );
 };
+
+// TRENDING 

@@ -16,7 +16,7 @@ import PosterFallback from "../../assets/no-poster.png";
 import CircleRating from "../circleRating/CircleRaing";
 import Genres from "../genre/Genres";
 
-const Carousel = ({ data, loading, endpoint }) => {
+const Carousel = ({ data, loading, endPoint }) => {
   const navigate = useNavigate();
   const { url } = useSelector((state) => state.home);
 
@@ -69,12 +69,15 @@ const Carousel = ({ data, loading, endpoint }) => {
                 ? url.poster + item.poster_path
                 : PosterFallback;
 
+              const urlForSingleMovie = `/${item?.media_type || endPoint}/${
+                item?.id
+              }`;
+
               return (
                 <div
                   key={item.id}
                   className="carouselItem"
-                  
-                  onClick={() => navigate(`/${item.media_type || endpoint}/${item.id}`)}
+                  onClick={() => navigate(urlForSingleMovie)}
                 >
                   <div className="posterBlock">
                     <LazyImage src={posterURL} />

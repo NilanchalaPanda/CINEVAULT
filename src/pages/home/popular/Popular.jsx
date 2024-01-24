@@ -19,6 +19,8 @@ export const Popular = () => {
     setEndPoint(tab === "Movie" ? "movie" : "tv");
   };
 
+  console.log("popular ka endpont : ", endPoint);
+
   return (
     <div className="carouselSection">
       <ContentWrapper>
@@ -29,7 +31,10 @@ export const Popular = () => {
         />
       </ContentWrapper>
 
+
       <Carousel data={data?.results} loading={loading} endPoint={endPoint} />
     </div>
   );
 };
+
+// POPULAR
