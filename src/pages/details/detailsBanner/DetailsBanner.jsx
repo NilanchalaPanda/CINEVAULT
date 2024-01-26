@@ -12,8 +12,11 @@ import CircleRating from "../../../components/circleRating/CircleRaing.jsx";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import PosterFallback from "../../../assets/no-poster.png";
 import { PlayIcon } from "../Playbtn.jsx";
+import VideoPopup from "../../../components/videoPopUp/VideoPopup.jsx";
 
-const DetailsBanner = ({ video, crew }) => {
+  const [show, setShow] = useState(false);
+  const [videoID, setVideoID] = useState(null);
+
   // MediaType == movie || tv
   const { mediaType, id } = useParams();
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
@@ -83,11 +86,16 @@ const DetailsBanner = ({ video, crew }) => {
                     <div className="row">
                       <CircleRating rating={data.vote_average.toFixed(2)} />
 
-                      <div className="playbtn">
+                      <div
+                        className="playbtn"
+                        onClick={() => {
+                          setShow(true);
+                          console.log(video);
+                          setVideoID(video?.key);
+                        }}
+                      >
                         <PlayIcon />
-                        <span onClick={() => {}} className="text">
-                          Watch Trailer
-                        </span>
+                        <span className="text">Watch Trailer</span>
                       </div>
                     </div>
                     {/* Row Ended */}
@@ -175,6 +183,13 @@ const DetailsBanner = ({ video, crew }) => {
                     )}
                   </div>
                 </div>
+
+                <VideoPopup
+                  show={show}
+                  setShow={setShow}
+                  videoID={videoID}
+                  setVideoID={setVideoID}
+                />
               </ContentWrapper>
             </React.Fragment>
           )}

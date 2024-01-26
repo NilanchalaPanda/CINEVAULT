@@ -18,9 +18,7 @@ export const Popular = () => {
   const handleTabChange = (tab) => {
     setEndPoint(tab === "Movie" ? "movie" : "tv");
   };
-
-  console.log("popular ka endpont : ", endPoint);
-
+  
   return (
     <div className="carouselSection">
       <ContentWrapper>

@@ -11,9 +11,11 @@ const Details = () => {
     `/${mediaType}/${id}/credits`
   );
 
+  console.log( "vedio data :", data?.results[0]);
+
   return (
     <div>
-      <DetailsBanner vedio={data?.results?.[0]} crew={credits?.crew} />
+      <DetailsBanner video={data?.results[0]} crew={credits?.crew} />
     </div>
   );
 };
