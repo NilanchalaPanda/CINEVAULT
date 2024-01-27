@@ -30,24 +30,24 @@ const SearchResult = () => {
   };
 
   // NOT WORKING -
-  const fetchNextPageData = () => {
-    setLoading(true);
-    fetchDataFromAPI(`search/multi?query=${query}&page=${pageNum}`).then(
-      (res) => {
-        if (res?.results && Array.isArray(res.results)) {
-          // Check if results is iterable
-          setData({
-            ...data,
-            results: [...data?.results, ...res.results],
-          });
-        } else {
-          setData(res);
-        }
-      }
-    );
-  };
+  // const fetchNextPageData = () => {
+  //   setLoading(true);
+  //   fetchDataFromAPI(`search/multi?query=${query}&page=${pageNum}`).then(
+  //     (res) => {
+  //       console.log( "RES : ", res);
+  //       if(data?.results){
+  //         setData({
+  //           ...data, results: [...data?.results, ...res.results]
+  //         })
+  //       } else {
+  //         setData(res)
+  //       }
+  //     }
+  //   );
+  // };
 
   useEffect(() => {
+    setPageNum(1);
     fetchInitialData();
   }, [query]);
 
@@ -57,7 +57,7 @@ const SearchResult = () => {
         <Spinner initial={true} />
       ) : (
         <ContentWrapper>
-          {data?.results.length > 0 ? (
+          {data?.results?.length > 0 ? (
             <>
               <div className="pageTitle">{`Search ${
                 data.total_results > 1 ? "results" : "result"
