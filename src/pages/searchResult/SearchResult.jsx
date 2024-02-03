@@ -29,22 +29,27 @@ const SearchResult = () => {
     );
   };
 
-  // NOT WORKING -
-  // const fetchNextPageData = () => {
-  //   setLoading(true);
-  //   fetchDataFromAPI(`search/multi?query=${query}&page=${pageNum}`).then(
-  //     (res) => {
-  //       console.log( "RES : ", res);
-  //       if(data?.results){
-  //         setData({
-  //           ...data, results: [...data?.results, ...res.results]
-  //         })
-  //       } else {
-  //         setData(res)
-  //       }
-  //     }
-  //   );
-  // };
+  const fetchNextPageData = async () => {
+    try {
+      const res = await fetchDataFromAPI(
+        `/search/multi?query=${query}&page=${pageNum}`
+      );
+
+      if (data?.results) {
+        setData({
+          ...data,
+          results: [...data?.results, ...res.results],
+        });
+      } else {
+        setData(res);
+      }
+
+      setPageNum((prev) => prev + 1);
+    } catch (error) {
+      // Handle error if needed
+      console.error("Error fetching data:", error);
+    }
+  };
 
   useEffect(() => {
     setPageNum(1);
@@ -66,7 +71,7 @@ const SearchResult = () => {
               <InfiniteScroll
                 className="content"
                 dataLength={data?.results?.length || []}
-                // next={fetchNextPageData}
+                next={fetchNextPageData}
                 hasMore={pageNum <= data.total_pages}
                 loader={<Spinner />}
               >
