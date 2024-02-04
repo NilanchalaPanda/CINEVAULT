@@ -32,7 +32,7 @@ CINVAULT is built using the following technologies:
 
 - **Redux**: A predictable state container for managing the application state in JavaScript applications.
 
-- **Tailwind CSS**: A utility-first CSS framework that provides low-level utility classes to build designs directly in your markup.
+- **SCSS**: A CSS preprocessor that enhances the capabilities of CSS with variables, nesting, and other useful features to write maintainable and scalable stylesheets.
 
 - **TMDB API**: The application utilizes The Movie Database (TMDB) API to fetch movie and TV show details, including images, ratings, and cast information.
 
